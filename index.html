@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza_Cart_API</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="index.js"></script>
+    <style>
+        body {
+
+            background-image: url("fire.jpg");
+            background-color: #cccccc;
+            background-size: cover;
+            margin: 10px;
+        }
+    </style>
+
+</head>
+
+<body x-data="pizzaCart">
+
+    <div class="container">
+        <h1 x-text="title"></h1>
+        <div class="cart">
+            <div class="userCode">
+                <div>Username : <span x-text="username"></span></div>
+                <div>Cart Code : <span x-text="cartID"></span></div>
+            </div>
+        </div>
+        <h2>Your cart</h2>
+        <div class="message" x-text="message" style="color: antiquewhite;">message here</div>
+        <table>
+            <tr>
+                <th>Flavour</th>
+                <th>Size</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+
+                <th colspan="3">Total</th>
+                <th colspan="2"><span x-text="cartTotal">R</span></th>
+
+            </tr>
+
+
+            <template x-for="pizza in cartPizzas">
+                <tr >
+                    <td x-text="pizza.flavour"></td>
+                    <td x-text="pizza.size"></td>
+                    <td x-text="pizza.price"></td>
+                    <td>
+                        <button x-on:click="addPizzasToCart(pizza.id)">+</button>
+                        x<span x-text="pizza.qty"></span>
+                        <button x-on:click="removePizzaFromCart(pizza.id)">-</button>
+                    </td>
+
+
+                    <td x-text="pizza.cartTotal"></td>
+                </tr>
+            </template>
+
+            <tr>
+                <th colspan="2">Pay Now</th>
+                <th>
+                    <input x-model="paymentAmount" value="" type="number">
+                </th>
+                <th colspan="2"><button x-on:click="payForCart()" style="width: 100px;">Pay</button></th>
+            </tr>
+        </table>
+
+    </div>
+    <br><br><br>
+
+    <section>
+
+
+
+        <div class="subsect" id="menu">
+
+            <div class="polaroid" style="margin-left: 4.5em;">
+                <img src="small.png" style="width:80%">
+                <div class="container">
+                    <h2 style="color: rgb(11, 19, 19);">Small <br> R99 <br>Danish feta, mature cheddar, parmesan and
+                        <br> mozzarella with
+                        braised onion marmalade
+                    </h2>
+                    <div>
+                        <a href="#bill"> <button @click="incrementSmall">Buy Now</button></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <br>
+
+
+
+        <div class="subsect">
+
+
+            <div class="polaroid" style="margin-left: 4.5em;">
+                <img src="medium.png" style="width:100%">
+                <div class="container">
+                    <h2 style="color: rgb(11, 19, 19);">Medium <br> R120 <br>Garlic butter sauce with mozzarella
+                        cheese.<br>
+                        Slivers of beef pastrami, pineapple and avocado</h2>
+                    <div>
+                        <a href="#bill"> <button @click="incrementMedium">Buy Now</button></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="subsect">
+
+
+            <div class="polaroid" style="margin-left: 4.5em;">
+                <img src="large.jpeg" style="width:100%">
+
+                <div class="container">
+                    <h2 style="color: rgb(11, 19, 19);">Large <br> R179 <br>Freshly grilled deboned lamb chops on
+                        order & coriander
+                        <br> Freshly grilled beef fillet
+                    </h2>
+                    <div>
+                        <a href="#bill"> <button @click="incrementLarge">Buy Now</button></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+    <br><br><br>
+
+    <div class="pizzas"  style="margin-left: 38em;">
+        <h2 style="text-align: center;" class='pRoll'>Pizzas</h2>
+
+        <template x-for="pizza in pizzas">
+            <div class="pizzarolls">
+
+                <h5 x-text="pizza.flavour"></h5>
+                <span x-text="pizza.size">@</span>
+
+                R<span x-text="pizza.price"></span>
+
+
+                <div>
+                    <button class="btn" x-on:click="addPizzasToCart(pizza.id)">Add to cart</button>
+                </div>
+
+                <div style="display: flex;" x-text="pizza.total"></div>
+
+                <br>
+                <div style="display: flex;">
+                    <img class="tinyPizza" src="tinyPizza.jpeg" alt="" width="100%"  >
+                </div>
+            </div>
+        </template>
+
+    </div>
+    <br><br><br>
+    <div class="contact">
+
+        <h2 class="order1">Order Now On ! 011 797 6411</h2>
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-instagram"></a>
+        <a href="#" class="fa fa-google"></a>
+    </div>
+
+
+
+
+</body>
+<footer style="text-align: center;">© Raadiyah Arend Copyright 2023</footer>
+
+</html>
