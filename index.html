@@ -83,7 +83,7 @@
     </div>
     <br><br><br>
 
-    <section>
+    <section x-show="username && cartID">
 
 
 
@@ -92,13 +92,18 @@
             <div class="polaroid" style="margin-left: 4.5em;">
                 <img src="small.png" style="width:80%">
                 <div class="container">
-                    <h2 style="color: rgb(11, 19, 19);">Small <br> R99 <br>Danish feta, mature cheddar, parmesan and
-                        <br> mozzarella with
-                        braised onion marmalade
-                    </h2>
-                    <div>
-                        <a href="#bill"> <button @click="incrementSmall">Buy Now</button></a>
-                    </div>
+                  
+                <h5 x-text="pizza.flavour"></h5>
+                <span x-text="pizza.size">@</span>
+
+                R<span x-text="pizza.price"></span>
+
+
+                <div>
+                    <button class="btn" x-on:click="addPizzasToCart(pizza.id)">Add to cart</button>
+                </div>
+
+                <div style="display: flex;" x-text="pizza.total"></div>
                 </div>
 
             </div>
@@ -117,12 +122,18 @@
             <div class="polaroid" style="margin-left: 4.5em;">
                 <img src="medium.png" style="width:100%">
                 <div class="container">
-                    <h2 style="color: rgb(11, 19, 19);">Medium <br> R120 <br>Garlic butter sauce with mozzarella
-                        cheese.<br>
-                        Slivers of beef pastrami, pineapple and avocado</h2>
-                    <div>
-                        <a href="#bill"> <button @click="incrementMedium">Buy Now</button></a>
-                    </div>
+                   
+                <h5 x-text="pizza.flavour"></h5>
+                <span x-text="pizza.size">@</span>
+
+                R<span x-text="pizza.price"></span>
+
+
+                <div>
+                    <button class="btn" x-on:click="addPizzasToCart(pizza.id)">Add to cart</button>
+                </div>
+
+                <div style="display: flex;" x-text="pizza.total"></div>
                 </div>
 
             </div>
@@ -138,13 +149,18 @@
                 <img src="large.jpeg" style="width:100%">
 
                 <div class="container">
-                    <h2 style="color: rgb(11, 19, 19);">Large <br> R179 <br>Freshly grilled deboned lamb chops on
-                        order & coriander
-                        <br> Freshly grilled beef fillet
-                    </h2>
-                    <div>
-                        <a href="#bill"> <button @click="incrementLarge">Buy Now</button></a>
-                    </div>
+                  
+                <h5 x-text="pizza.flavour"></h5>
+                <span x-text="pizza.size">@</span>
+
+                R<span x-text="pizza.price"></span>
+
+
+                <div>
+                    <button class="btn" x-on:click="addPizzasToCart(pizza.id)">Add to cart</button>
+                </div>
+
+                <div style="display: flex;" x-text="pizza.total"></div>
                 </div>
 
             </div>
@@ -169,6 +185,9 @@
 
                 <div>
                     <button class="btn" x-on:click="addPizzasToCart(pizza.id)">Add to cart</button>
+                </div>
+                <div>
+                    <button class="btn" x-on:click="addFeature()">Add to feature</button>
                 </div>
 
                 <div style="display: flex;" x-text="pizza.total"></div>

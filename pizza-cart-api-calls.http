@@ -64,3 +64,9 @@ content-type: application/json
 	"amount" : 200
 }
 
+### Set a given pizza id to be featured - max 3 ids
+POST  https://pizza-api.projectcodex.net/api/pizzas/featured
+
+
+### Get a list of featured pizzas for a given user
+GET https://pizza-api.projectcodex.net/api/pizzas/featured?username=your_name

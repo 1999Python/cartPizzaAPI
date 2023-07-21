@@ -3,8 +3,8 @@
   margin: 0.5em;
   padding: 0.3em;
   background-color: rgb(243, 175, 86);
-  width: 450px;
-
+  width: 500px;
+margin-left: 40em;
 
 }
 
@@ -97,7 +97,7 @@ button {
   color: #fff;
   background-color: #4CAF50;
   border: none;
-  border-radius: 15px;
+  border-radius: 25px;
   box-shadow: 0 3px #999;
 }
 

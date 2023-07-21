@@ -12,28 +12,28 @@ document.addEventListener("alpine:init", () => {
             cartTotal: 0.00,
             paymentAmount: 0,
             message: '',
-login() {
-if(this.username.length>2){
-    localStorage['username'] = this.username;
-    this.createCart();
-}else{
-    alert("Username is too short")
-}
-},
-logout(){
-if(confirm('Do you want to logout?')){
-    this.username = '';
-    this.cartID = '';
-    localStorage['cartID'] = '';
-    localStorage['username'] = '';
-}
-},
+            login() {
+                if (this.username.length > 2) {
+                    localStorage['username'] = this.username;
+                    this.createCart();
+                } else {
+                    alert("Username is too short")
+                }
+            },
+            logout() {
+                if (confirm('Do you want to logout?')) {
+                    this.username = '';
+                    this.cartID = '';
+                    localStorage['cartID'] = '';
+                    localStorage['username'] = '';
+                }
+            },
             createCart() {
 
                 if (!this.username) {
-                   
+
                     return Promise.resolve();
-                   
+
                 }
 
                 const cartID = localStorage['cartID'];
@@ -87,17 +87,24 @@ if(confirm('Do you want to logout?')){
                     this.cartTotal = cartData.total.toFixed(2);
                 });
             },
+            addFeature() {
+                const selectFeature = `https://pizza-api.projectcodex.net/api/pizzas/featured?username${this.username}`
+                return axios.get(selectFeature);
+            },
+            featuresThree(pizzaID){
 
+                return axios.post(" https://pizza-api.projectcodex.net//api/pizzas/featured", {
+                    "cart_code": this.cartID,
+                    "pizza_id": pizzaID
+                })
+            },
 
             init() {
 
-const storedUsername = localStorage['username'];
-if(storedUsername){
-    this.username =storedUsername;
-}
-
-
-
+                const storedUsername = localStorage['username'];
+                if (storedUsername) {
+                    this.username = storedUsername;
+                }
 
                 axios
                     .get('https://pizza-api.projectcodex.net/api/pizzas')
