@@ -27,55 +27,59 @@
 
     <div class="container">
         <h1 x-text="title"></h1>
-        <div class="cart">
+
+        <div class="cart" x-cloak>
             <div class="userCode">
-                <div>Username : <span x-text="username"></span></div>
-                <div>Cart Code : <span x-text="cartID"></span></div>
-            </div>
+                <div>Username : <input x-model="username" type="text">
+                    <button x-on:click="login" x-show="username">login</button>
+                    <button x-on:click="logout" x-show="username && cartID">logout</button>
+                </div>
+                <div x-show="cartID">Cart Code : <span x-text="cartID"></span></div>
+             </div>
         </div>
-        <h2>Your cart</h2>
-        <div class="message" x-text="message" style="color: antiquewhite;">message here</div>
-        <table>
-            <tr>
-                <th>Flavour</th>
-                <th>Size</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-            <tr>
-
-                <th colspan="3">Total</th>
-                <th colspan="2"><span x-text="cartTotal">R</span></th>
-
-            </tr>
-
-
-            <template x-for="pizza in cartPizzas">
-                <tr >
-                    <td x-text="pizza.flavour"></td>
-                    <td x-text="pizza.size"></td>
-                    <td x-text="pizza.price"></td>
-                    <td>
-                        <button x-on:click="addPizzasToCart(pizza.id)">+</button>
-                        x<span x-text="pizza.qty"></span>
-                        <button x-on:click="removePizzaFromCart(pizza.id)">-</button>
-                    </td>
-
-
-                    <td x-text="pizza.cartTotal"></td>
+        <div x-show="cartTotal > 0">
+            <div class="message" x-text="message" style="color: antiquewhite;">message here</div>
+            <table>
+                <tr>
+                    <th>Flavour</th>
+                    <th>Size</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Total</th>
                 </tr>
-            </template>
+                <tr>
 
-            <tr>
-                <th colspan="2">Pay Now</th>
-                <th>
-                    <input x-model="paymentAmount" value="" type="number">
-                </th>
-                <th colspan="2"><button x-on:click="payForCart()" style="width: 100px;">Pay</button></th>
-            </tr>
-        </table>
+                    <th colspan="3">Total</th>
+                    <th colspan="2"><span x-text="cartTotal">R</span></th>
 
+                </tr>
+
+
+                <template x-for="pizza in cartPizzas">
+                    <tr>
+                        <td x-text="pizza.flavour"></td>
+                        <td x-text="pizza.size"></td>
+                        <td x-text="pizza.price"></td>
+                        <td>
+                            <button x-on:click="addPizzasToCart(pizza.id)">+</button>
+                            x<span x-text="pizza.qty"></span>
+                            <button x-on:click="removePizzaFromCart(pizza.id)">-</button>
+                        </td>
+
+
+                        <td x-text="pizza.cartTotal"></td>
+                    </tr>
+                </template>
+
+                <tr>
+                    <th colspan="2">Pay Now</th>
+                    <th>
+                        <input x-model="paymentAmount" value="" type="number">
+                    </th>
+                    <th colspan="2"><button x-on:click="payForCart()" style="width: 100px;">Pay</button></th>
+                </tr>
+            </table>
+        </div>
     </div>
     <br><br><br>
 
@@ -151,7 +155,7 @@
 
     <br><br><br>
 
-    <div class="pizzas"  style="margin-left: 38em;">
+    <div class="pizzas" x-show="username && cartID" >
         <h2 style="text-align: center;" class='pRoll'>Pizzas</h2>
 
         <template x-for="pizza in pizzas">
@@ -171,7 +175,7 @@
 
                 <br>
                 <div style="display: flex;">
-                    <img class="tinyPizza" src="tinyPizza.jpeg" alt="" width="100%"  >
+                    <img class="tinyPizza" src="tinyPizza.jpeg" alt="" width="100%">
                 </div>
             </div>
         </template>

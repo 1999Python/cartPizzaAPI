@@ -6,16 +6,50 @@ document.addEventListener("alpine:init", () => {
 
             title: "Pizza Cart API",
             pizzas: [],
-            username: '1999Python',
+            username: '',
             cartID: '',
             cartPizzas: [],
             cartTotal: 0.00,
             paymentAmount: 0,
             message: '',
-
+login() {
+if(this.username.length>2){
+    localStorage['username'] = this.username;
+    this.createCart();
+}else{
+    alert("Username is too short")
+}
+},
+logout(){
+if(confirm('Do you want to logout?')){
+    this.username = '';
+    this.cartID = '';
+    localStorage['cartID'] = '';
+    localStorage['username'] = '';
+}
+},
             createCart() {
-                const createCartURL = `https://pizza-api.projectcodex.net/api/pizza-cart/create?username${this.username}`
-                return axios.get(createCartURL);
+
+                if (!this.username) {
+                   
+                    return Promise.resolve();
+                   
+                }
+
+                const cartID = localStorage['cartID'];
+
+                if (cartID) {
+                    this.cartID = cartID;
+                    return Promise.resolve();
+                }
+                else {
+                    const createCartURL = `https://pizza-api.projectcodex.net/api/pizza-cart/create?username${this.username}`
+                    return axios.get(createCartURL)
+                        .then(result => {
+                            this.cartID = result.data.cart_code;
+                            localStorage['cartId'] = this.cartID;
+                        });
+                }
             },
 
             getCart() {
@@ -56,6 +90,15 @@ document.addEventListener("alpine:init", () => {
 
 
             init() {
+
+const storedUsername = localStorage['username'];
+if(storedUsername){
+    this.username =storedUsername;
+}
+
+
+
+
                 axios
                     .get('https://pizza-api.projectcodex.net/api/pizzas')
                     .then(result => {
@@ -70,17 +113,17 @@ document.addEventListener("alpine:init", () => {
                     this.cartTotal = cartData.total;
 
                 })
-                if (!this.cartID){
-                    
+                if (!this.cartID) {
+
                     this
-                    .createCart()
-                    .then((result) =>{
-                        this.cartID = result.data.cart_code;
-                        this.showCartData();
-                    }
-                    )
+                        .createCart()
+                        .then((result) => {
+                            this.cartID = result.data.cart_code;
+                            this.showCartData();
+                        }
+                        )
                 }
-               
+
             },
 
             addPizzasToCart(pizzaID) {

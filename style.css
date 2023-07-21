@@ -1,6 +1,6 @@
 .pizzas {
   border: 12px solid rgb(255, 0, 0);
-  margin: 0.2em;
+  margin: 0.5em;
   padding: 0.3em;
   background-color: rgb(243, 175, 86);
   width: 450px;
@@ -166,16 +166,17 @@ div.container {
   background: #55ACEE;
   color: white;
 }
+
 .fa-google {
   background: #dd4b39;
   color: white;
 }
 
 
-.contact{
+.contact {
   margin-left: 42em;
   color: #fff;
-  
+
 }
 
 
@@ -190,5 +191,20 @@ div.container {
     margin: 1em;
     width: auto;
   }
+  .contact {
+    margin-left:6em;
+    color: #fff;
+  
+  }
 
+  .pizzas {
+ margin: 1em;
+ width: 420px;
+ border: 7px solid rgb(255, 0, 0);
+  }
+
+}
+
+[x-cloak] {
+  display: none !important;
 }
